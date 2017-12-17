@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Main.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,11 +21,25 @@ namespace Main
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
         public MainWindow()
         {
             InitializeComponent();
-            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
-            
+            this.DataContext = mainWindowViewModel;
+        }
+        
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            Task.Run(() =>
+            {
+                mainWindowViewModel.IsWhile = true;
+                mainWindowViewModel.BeginRefsherData();
+            });
+        }
+
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowViewModel.IsWhile = false;
         }
     }
 }

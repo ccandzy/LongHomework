@@ -28,5 +28,22 @@ namespace UnitTest
                 Assert.IsTrue(mainWindowViewModel.AllBeforeNumber.Distinct().Count() == 35);
             }
         }
+        [TestMethod]
+        public void GroupingData()
+        {
+            mainWindowViewModel.GroupingBeforeNumber();
+            foreach (var item in mainWindowViewModel.groupBeforeNumberDic)
+            {
+                Console.WriteLine(item.Key+":"+string.Join(",",item.Value));
+            }
+            Assert.AreEqual(mainWindowViewModel.groupBeforeNumberDic.Count, 5);
+        }
+
+        [TestMethod]
+        public void SummaryTest()
+        {
+            UpsetDate();
+            GroupingData();
+        }
     }
 }
